@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zirak AI — Sign In</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "primary": "#9cff93", "on-primary": "#006413",
+      "primary-dim": "#00ec3b", "primary-container": "#00fc40",
+      "background": "#0e0e0e", "surface": "#0e0e0e",
+      "surface-container-low": "#131313", "surface-container": "#1a1919",
+      "surface-container-high": "#201f1f", "surface-container-highest": "#262626",
+      "surface-variant": "#262626", "outline-variant": "#484847",
+      "on-surface": "#ffffff", "on-surface-variant": "#adaaaa",
+      "secondary-container": "#474746"
+    },
+    borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
+    fontFamily: { headline: ["Space Grotesk"], body: ["Inter"] }
+  }}
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
+.snap-motion { transition: all 150ms cubic-bezier(0.05,0.7,0.1,1.0); }
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #201f1f inset !important; -webkit-text-fill-color: #fff !important; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body min-h-screen flex items-center justify-center p-6">
+
+
+<div class="fixed inset-0 pointer-events-none opacity-[0.03]" style="background-image: linear-gradient(#9cff93 1px, transparent 1px), linear-gradient(90deg, #9cff93 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+<div class="w-full max-w-md relative z-10">
+
+  
+  <div class="flex flex-col items-center mb-12">
+    <div class="w-14 h-14 bg-primary flex items-center justify-center mb-6">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#006413" stroke-width="2" fill="none"/>
+        <path d="M16 4L16 16M16 16L28 10M16 16L4 10M16 16L28 22M16 16L4 22M16 16L16 28" stroke="#006413" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="3" fill="#006413"/>
+      </svg>
+    </div>
+    <h1 class="font-headline font-black text-4xl tracking-tighter text-on-surface">Zirak AI</h1>
+    <p class="text-on-surface-variant text-xs tracking-[0.25em] uppercase mt-2">Velocity Logic Engine</p>
+  </div>
+
+  
+  <div class="flex border-b border-surface-container-highest mb-8">
+    <button id="tab-login" onclick="switchTab('login')"
+      class="flex-1 py-3 text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary snap-motion font-body">
+      Sign In
+    </button>
+    <button id="tab-register" onclick="switchTab('register')"
+      class="flex-1 py-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant border-b-2 border-transparent snap-motion font-body">
+      Register
+    </button>
+  </div>
+
+  
+  <div id="error-msg" class="hidden bg-surface-container-high border-l-2 border-red-500 px-4 py-3 mb-6 text-sm text-red-400"></div>
+  <div id="success-msg" class="hidden bg-surface-container-high border-l-2 border-primary px-4 py-3 mb-6 text-sm text-primary"></div>
+
+  
+  <form id="auth-form" onsubmit="handleSubmit(event)" class="flex flex-col gap-5">
+    <div>
+      <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Username</label>
+      <input id="username" type="text" autocomplete="username"
+        class="w-full bg-surface-container-high border-0 border-b-2 border-surface-container-highest focus:border-primary text-on-surface text-sm px-4 py-3 outline-none snap-motion font-body"
+        placeholder="your username"/>
+    </div>
+    <div>
+      <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">Password</label>
+      <input id="password" type="password" autocomplete="current-password"
+        class="w-full bg-surface-container-high border-0 border-b-2 border-surface-container-highest focus:border-primary text-on-surface text-sm px-4 py-3 outline-none snap-motion font-body"
+        placeholder="••••••••"/>
+    </div>
+    <button type="submit" id="submit-btn"
+      class="mt-2 w-full bg-primary text-on-primary font-bold text-xs uppercase tracking-widest py-4 snap-motion hover:bg-primary-dim active:scale-[0.98] font-body flex items-center justify-center gap-2">
+      <span id="btn-text">Access Zirak AI</span>
+      <span class="material-symbols-outlined text-sm">arrow_forward</span>
+    </button>
+  </form>
+
+  <p class="text-center text-[10px] text-surface-container-highest mt-10 tracking-widest uppercase font-headline">
+    Zirak AI &copy; 2024
+  </p>
+</div>
+
+<script>
+let activeTab = 'login';
+
+function switchTab(tab) {
+  activeTab = tab;
+  const loginBtn = document.getElementById('tab-login');
+  const regBtn = document.getElementById('tab-register');
+  const btnText = document.getElementById('btn-text');
+  hideMessages();
+  if (tab === 'login') {
+    loginBtn.className = 'flex-1 py-3 text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary snap-motion font-body';
+    regBtn.className = 'flex-1 py-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant border-b-2 border-transparent snap-motion font-body';
+    btnText.textContent = 'Access Zirak AI';
+  } else {
+    regBtn.className = 'flex-1 py-3 text-xs font-bold uppercase tracking-widest text-primary border-b-2 border-primary snap-motion font-body';
+    loginBtn.className = 'flex-1 py-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant border-b-2 border-transparent snap-motion font-body';
+    btnText.textContent = 'Create Account';
+  }
+}
+
+function hideMessages() {
+  document.getElementById('error-msg').classList.add('hidden');
+  document.getElementById('success-msg').classList.add('hidden');
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  hideMessages();
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  if (!u || !p) { showError('Please fill in all fields.'); return; }
+
+  const btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.classList.add('opacity-60');
+
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ action: activeTab, username: u, password: p })
+  });
+  const data = await res.json();
+  btn.disabled = false;
+  btn.classList.remove('opacity-60');
+
+  if (data.ok) {
+    window.location.href = '/';
+  } else {
+    showError(data.error);
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('error-msg');
+  el.textContent = msg;
+  el.classList.remove('hidden');
+}
+</script>
+</body>
+</html>

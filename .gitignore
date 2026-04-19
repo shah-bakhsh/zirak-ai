@@ -1,0 +1,16 @@
+# Environments
+venv/
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Database and Storage
+data/users.db
+data/memory.db
+data/vectors.pkl
+
+# Uploads
+uploads/pdf_files/*
+!uploads/pdf_files/.gitkeep

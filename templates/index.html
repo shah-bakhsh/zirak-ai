@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zirak AI — Intelligence Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: { extend: {
+    colors: {
+      "primary": "#9cff93", "on-primary": "#006413",
+      "primary-dim": "#00ec3b", "primary-container": "#00fc40",
+      "background": "#0e0e0e", "surface": "#0e0e0e",
+      "surface-container-low": "#131313", "surface-container": "#1a1919",
+      "surface-container-high": "#201f1f", "surface-container-highest": "#262626",
+      "surface-variant": "#262626", "surface-bright": "#2c2c2c",
+      "outline-variant": "#484847", "outline": "#767575",
+      "on-surface": "#ffffff", "on-surface-variant": "#adaaaa",
+      "secondary-container": "#474746", "on-secondary-container": "#d2d0cf",
+      "error": "#ff7351"
+    },
+    borderRadius: { DEFAULT: "0px", lg: "0px", xl: "0px", full: "9999px" },
+    fontFamily: { headline: ["Space Grotesk"], body: ["Inter"] }
+  }}
+}
+</script>
+<style>
+.material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
+.snap-motion { transition: all 150ms cubic-bezier(0.05,0.7,0.1,1.0); }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: #0e0e0e; }
+::-webkit-scrollbar-thumb { background: #262626; }
+::-webkit-scrollbar-thumb:hover { background: #9cff93; }
+
+#chat-messages { scroll-behavior: smooth; }
+
+.mode-pill { transition: all 150ms cubic-bezier(0.05,0.7,0.1,1.0); cursor: pointer; }
+.mode-pill.active { background: #9cff93; color: #006413; }
+.mode-pill:not(.active) { background: #201f1f; color: #adaaaa; }
+.mode-pill:not(.active):hover { background: #262626; color: #fff; }
+
+.msg-user { background: #201f1f; }
+.msg-ai { background: transparent; }
+
+.cursor-blink::after { content: '|'; animation: blink 1s step-end infinite; color: #9cff93; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+textarea { resize: none; }
+input:-webkit-autofill { -webkit-box-shadow: 0 0 0 30px #201f1f inset !important; -webkit-text-fill-color: #fff !important; }
+
+.nav-link { transition: all 150ms cubic-bezier(0.05,0.7,0.1,1.0); }
+.nav-link.active { color: #9cff93; border-bottom: 2px solid #9cff93; }
+.nav-link:not(.active) { color: #adaaaa; border-bottom: 2px solid transparent; }
+.nav-link:not(.active):hover { color: #9cff93; background: #201f1f; }
+
+.upload-zone { border: 1px dashed #484847; transition: all 150ms ease; }
+.upload-zone.drag-over { border-color: #9cff93; background: #131313; }
+
+pre { white-space: pre-wrap; word-break: break-word; }
+code { font-family: 'Courier New', monospace; font-size: 0.8rem; }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body h-screen flex flex-col overflow-hidden">
+
+
+<header class="flex items-center justify-between px-6 py-0 h-14 bg-surface-container-low border-b border-surface-container-highest z-50 flex-shrink-0">
+  
+  <div class="flex items-center gap-3">
+    <div class="w-8 h-8 bg-primary flex items-center justify-center flex-shrink-0">
+      <svg width="18" height="18" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#006413" stroke-width="2.5" fill="none"/>
+        <path d="M16 4L16 16M16 16L28 10M16 16L4 10M16 16L28 22M16 16L4 22M16 16L16 28" stroke="#006413" stroke-width="1.5"/>
+        <circle cx="16" cy="16" r="3" fill="#006413"/>
+      </svg>
+    </div>
+    <div>
+      <span class="font-headline font-black text-primary text-base tracking-tighter">Zirak AI</span>
+      <span class="hidden sm:inline text-[9px] text-on-surface-variant tracking-[0.2em] uppercase ml-2">Velocity Logic</span>
+    </div>
+  </div>
+
+  
+  <nav class="hidden md:flex items-center gap-1 h-full">
+    <a href="#" onclick="setPage('chat'); return false;" id="nav-chat"
+       class="nav-link active px-4 py-1 text-[11px] font-bold uppercase tracking-widest font-body h-full flex items-center">
+      Intelligence
+    </a>
+    <a href="#" onclick="setPage('pdf'); return false;" id="nav-pdf"
+       class="nav-link px-4 py-1 text-[11px] font-bold uppercase tracking-widest font-body h-full flex items-center">
+      Workspace
+    </a>
+    <a href="#" onclick="setPage('goal'); return false;" id="nav-goal"
+       class="nav-link px-4 py-1 text-[11px] font-bold uppercase tracking-widest font-body h-full flex items-center">
+      Goal Planner
+    </a>
+    <a href="#" onclick="setPage('career'); return false;" id="nav-career"
+       class="nav-link px-4 py-1 text-[11px] font-bold uppercase tracking-widest font-body h-full flex items-center">
+      Career Coach
+    </a>
+  </nav>
+
+  
+  <div class="flex items-center gap-3">
+    <div class="hidden sm:flex items-center gap-1 bg-surface-container-high px-3 py-1">
+      <span class="w-1.5 h-1.5 bg-primary animate-pulse"></span>
+      <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Active</span>
+    </div>
+    <button onclick="clearChat()" class="snap-motion text-on-surface-variant hover:text-primary p-1.5" title="Clear chat">
+      <span class="material-symbols-outlined text-xl">delete_sweep</span>
+    </button>
+    <div class="w-8 h-8 bg-surface-container-highest flex items-center justify-center">
+      <span class="text-[10px] font-bold text-primary font-headline">{{ user[:2].upper() }}</span>
+    </div>
+    <a href="/logout" class="snap-motion text-on-surface-variant hover:text-primary p-1.5" title="Sign out">
+      <span class="material-symbols-outlined text-xl">logout</span>
+    </a>
+  </div>
+</header>
+
+
+
+
+<div id="page-chat" class="flex-1 flex flex-col overflow-hidden">
+  
+  <div id="chat-messages" class="flex-1 overflow-y-auto px-4 py-6">
+    <div id="messages-inner" class="max-w-3xl mx-auto flex flex-col gap-6">
+
+      
+      <div id="chat-welcome" class="flex flex-col items-center justify-center py-16 gap-8">
+        <div class="w-16 h-16 bg-primary flex items-center justify-center">
+          <svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#006413" stroke-width="2.5" fill="none"/>
+            <path d="M16 4L16 16M16 16L28 10M16 16L4 10M16 16L28 22M16 16L4 22M16 16L16 28" stroke="#006413" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="3" fill="#006413"/>
+          </svg>
+        </div>
+        <div class="text-center">
+          <h2 class="font-headline font-black text-3xl tracking-tighter text-on-surface mb-2">Zirak AI</h2>
+          <p class="text-on-surface-variant text-sm">Select a mode below and start your session.</p>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3 w-full max-w-lg">
+          <button onclick="quickPrompt('Explain quantum computing in simple terms')"
+            class="bg-surface-container-high text-left p-4 snap-motion hover:bg-surface-container-highest">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Science</p>
+            <p class="text-sm text-on-surface">Explain quantum computing</p>
+          </button>
+          <button onclick="quickPrompt('Write a Python function to sort a list of dictionaries by a key')"
+            class="bg-surface-container-high text-left p-4 snap-motion hover:bg-surface-container-highest">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Code</p>
+            <p class="text-sm text-on-surface">Sort dicts by key in Python</p>
+          </button>
+          <button onclick="quickPrompt('What are the top 5 productivity habits of high performers?')"
+            class="bg-surface-container-high text-left p-4 snap-motion hover:bg-surface-container-highest">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Productivity</p>
+            <p class="text-sm text-on-surface">High performer habits</p>
+          </button>
+          <button onclick="quickPrompt('Summarize the key principles of stoic philosophy')"
+            class="bg-surface-container-high text-left p-4 snap-motion hover:bg-surface-container-highest">
+            <p class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1">Philosophy</p>
+            <p class="text-sm text-on-surface">Stoic philosophy principles</p>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  
+  <div class="bg-background border-t border-surface-container-highest flex-shrink-0">
+    
+    <div class="max-w-3xl mx-auto px-4 pt-3 pb-2 flex gap-2 overflow-x-auto">
+      <button class="mode-pill active flex-shrink-0 px-3 py-1 text-[10px] font-bold uppercase tracking-widest font-body flex items-center gap-1.5" data-mode="chat" onclick="setMode('chat', this)">
+        <span class="material-symbols-outlined text-sm">chat_bubble</span> Chat
+      </button>
+      <button class="mode-pill flex-shrink-0 px-3 py-1 text-[10px] font-bold uppercase tracking-widest font-body flex items-center gap-1.5" data-mode="pdf" onclick="setMode('pdf', this)">
+        <span class="material-symbols-outlined text-sm">description</span> PDF Analysis
+      </button>
+      <button class="mode-pill flex-shrink-0 px-3 py-1 text-[10px] font-bold uppercase tracking-widest font-body flex items-center gap-1.5" data-mode="goal" onclick="setMode('goal', this)">
+        <span class="material-symbols-outlined text-sm">flag</span> Goal Planner
+      </button>
+      <button class="mode-pill flex-shrink-0 px-3 py-1 text-[10px] font-bold uppercase tracking-widest font-body flex items-center gap-1.5" data-mode="career" onclick="setMode('career', this)">
+        <span class="material-symbols-outlined text-sm">trending_up</span> Career Coach
+      </button>
+    </div>
+
+    
+    <div id="pdf-upload-bar" class="hidden max-w-3xl mx-auto px-4 pb-2">
+      <div class="upload-zone bg-surface-container-low px-4 py-3 flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-on-surface-variant text-xl">upload_file</span>
+          <div>
+            <p id="pdf-status" class="text-sm text-on-surface-variant">Upload a PDF to analyze — then ask questions below</p>
+          </div>
+        </div>
+        <label for="pdf-input" class="flex-shrink-0 bg-primary text-on-primary text-[10px] font-bold uppercase tracking-widest px-4 py-2 cursor-pointer snap-motion hover:bg-primary-dim">
+          Upload PDF
+        </label>
+        <input id="pdf-input" type="file" accept=".pdf" class="hidden" onchange="uploadPDF(this)"/>
+      </div>
+    </div>
+
+    
+    <div class="max-w-3xl mx-auto px-4 pb-4">
+      <div class="relative bg-surface-container-high group">
+        <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-transparent group-focus-within:bg-primary snap-motion"></div>
+        <textarea id="chat-input" rows="1"
+          class="w-full bg-transparent border-0 border-b-2 border-surface-container-highest focus:border-primary text-on-surface placeholder:text-on-surface-variant/40 text-sm px-4 pt-3 pb-10 outline-none font-body resize-none"
+          placeholder="Type your message..."
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"></textarea>
+        <div class="absolute bottom-2 right-3 flex items-center gap-2">
+          <span id="mode-label" class="text-[9px] uppercase tracking-widest text-on-surface-variant font-bold border border-outline-variant px-1.5 py-0.5">Chat</span>
+          <button onclick="sendMessage()" id="send-btn"
+            class="bg-primary text-on-primary p-2 snap-motion hover:bg-primary-dim active:scale-95 flex items-center justify-center">
+            <span class="material-symbols-outlined text-base">arrow_upward</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex justify-between mt-1.5 px-1">
+        <span class="text-[9px] text-on-surface-variant uppercase tracking-widest">Zirak AI · OpenRouter · Llama 3</span>
+        <span class="text-[9px] text-on-surface-variant uppercase tracking-widest">Enter to send · Shift+Enter for newline</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="page-pdf" class="hidden flex-1 flex flex-col overflow-hidden">
+  <div class="flex-1 overflow-y-auto">
+    <div class="max-w-5xl mx-auto px-8 py-10">
+      <div class="mb-10">
+        <h1 class="font-headline font-black text-5xl tracking-tighter mb-2">WORKSPACE<span class="text-primary">.</span></h1>
+        <p class="text-on-surface-variant text-xs uppercase tracking-widest">Document Intelligence & PDF Analysis</p>
+      </div>
+      
+      <div class="upload-zone p-10 flex flex-col items-center gap-4 mb-8 cursor-pointer" id="drop-zone"
+        onclick="document.getElementById('pdf-main-input').click()"
+        ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+        <span class="material-symbols-outlined text-5xl text-on-surface-variant">upload_file</span>
+        <div class="text-center">
+          <p class="text-on-surface font-bold mb-1">Drop PDF here or click to upload</p>
+          <p class="text-on-surface-variant text-sm">Supports PDF files. Document will be vectorized for AI querying.</p>
+        </div>
+        <div id="pdf-main-status" class="text-primary text-sm font-bold hidden"></div>
+        <input id="pdf-main-input" type="file" accept=".pdf" class="hidden" onchange="uploadPDFMain(this)"/>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-surface-container-highest mb-8">
+        <div class="bg-surface p-6">
+          <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Status</p>
+          <p id="ws-status" class="text-xl font-headline font-bold text-on-surface-variant">No Document</p>
+        </div>
+        <div class="bg-surface p-6">
+          <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Chunks Indexed</p>
+          <p id="ws-chunks" class="text-xl font-headline font-bold text-primary">0</p>
+        </div>
+        <div class="bg-surface p-6">
+          <p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Mode</p>
+          <p class="text-xl font-headline font-bold text-on-surface">RAG Analysis</p>
+        </div>
+      </div>
+      
+      <button onclick="setPage('chat'); setMode('pdf', document.querySelector('[data-mode=pdf]'))"
+        class="bg-primary text-on-primary px-8 py-4 font-bold uppercase tracking-widest text-xs snap-motion hover:bg-primary-dim flex items-center gap-3">
+        <span class="material-symbols-outlined text-sm">chat_bubble</span>
+        Ask Questions About Your Document
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<div id="page-goal" class="hidden flex-1 overflow-y-auto">
+  <div class="max-w-5xl mx-auto px-8 py-10">
+    <div class="mb-10">
+      <h1 class="font-headline font-black text-5xl tracking-tighter mb-2">GOAL PLANNER<span class="text-primary">.</span></h1>
+      <p class="text-on-surface-variant text-xs uppercase tracking-widest">Define your objective — receive a precision execution plan</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-surface-container-highest mb-8">
+      <div class="bg-surface p-6">
+        <span class="material-symbols-outlined text-primary mb-3 block">flag</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight mb-1">Define</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Describe any personal, professional, or creative goal in detail.</p>
+      </div>
+      <div class="bg-surface p-6">
+        <span class="material-symbols-outlined text-primary mb-3 block">account_tree</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight mb-1">Breakdown</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Zirak AI builds a step-by-step plan with timelines and milestones.</p>
+      </div>
+      <div class="bg-surface p-6">
+        <span class="material-symbols-outlined text-primary mb-3 block">rocket_launch</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight mb-1">Execute</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Follow the precision roadmap and track your progress.</p>
+      </div>
+    </div>
+    <div class="bg-surface-container-low p-8">
+      <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">Describe Your Goal</label>
+      <textarea id="goal-input" rows="5"
+        class="w-full bg-surface-container-high border-0 border-b-2 border-surface-container-highest focus:border-primary text-on-surface text-sm px-4 py-3 outline-none font-body"
+        placeholder="e.g. I want to become a machine learning engineer in 6 months. I have a Python background but no ML experience..."></textarea>
+      <div class="mt-4 flex items-center gap-4">
+        <button onclick="generatePlan()"
+          class="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest text-xs snap-motion hover:bg-primary-dim flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">auto_awesome</span>
+          Generate Plan
+        </button>
+        <button onclick="setPage('chat'); setMode('goal', document.querySelector('[data-mode=goal]'))"
+          class="bg-surface-container-high text-on-surface-variant px-6 py-3 text-xs font-bold uppercase tracking-widest snap-motion hover:bg-surface-container-highest">
+          Open in Chat
+        </button>
+      </div>
+      <div id="goal-output" class="hidden mt-6 border-l-2 border-primary pl-6">
+        <p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-3">Generated Plan</p>
+        <div id="goal-result" class="text-sm text-on-surface leading-relaxed whitespace-pre-wrap"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="page-career" class="hidden flex-1 overflow-y-auto">
+  <div class="max-w-5xl mx-auto px-8 py-10">
+    <div class="mb-10">
+      <h1 class="font-headline font-black text-5xl tracking-tighter mb-2">CAREER COACH<span class="text-primary">.</span></h1>
+      <p class="text-on-surface-variant text-xs uppercase tracking-widest">AI-powered career intelligence — sharp, direct, actionable</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-surface-container-highest mb-8">
+      <button onclick="careerQuick('Resume Review')"
+        class="bg-surface p-6 text-left snap-motion hover:bg-surface-container-high group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-3 block snap-motion">description</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight">Resume Review</p>
+        <p class="text-on-surface-variant text-xs mt-1">Optimize impact</p>
+      </button>
+      <button onclick="careerQuick('Interview Preparation')"
+        class="bg-surface p-6 text-left snap-motion hover:bg-surface-container-high group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-3 block snap-motion">record_voice_over</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight">Interview Prep</p>
+        <p class="text-on-surface-variant text-xs mt-1">Ace the questions</p>
+      </button>
+      <button onclick="careerQuick('Career Pivot Strategy')"
+        class="bg-surface p-6 text-left snap-motion hover:bg-surface-container-high group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-3 block snap-motion">pivot_table_chart</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight">Career Pivot</p>
+        <p class="text-on-surface-variant text-xs mt-1">Navigate change</p>
+      </button>
+      <button onclick="careerQuick('Salary Negotiation')"
+        class="bg-surface p-6 text-left snap-motion hover:bg-surface-container-high group">
+        <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary mb-3 block snap-motion">payments</span>
+        <p class="font-headline font-bold text-sm uppercase tracking-tight">Salary Negotiation</p>
+        <p class="text-on-surface-variant text-xs mt-1">Maximize compensation</p>
+      </button>
+    </div>
+    <div class="bg-surface-container-low p-8">
+      <label class="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">Your Situation</label>
+      <textarea id="career-input" rows="5"
+        class="w-full bg-surface-container-high border-0 border-b-2 border-surface-container-highest focus:border-primary text-on-surface text-sm px-4 py-3 outline-none font-body"
+        placeholder="e.g. I have 4 years in software engineering at a startup and want to move into a senior role at a FAANG company..."></textarea>
+      <div class="mt-4 flex items-center gap-4">
+        <button onclick="getCareerAdvice()"
+          class="bg-primary text-on-primary px-8 py-3 font-bold uppercase tracking-widest text-xs snap-motion hover:bg-primary-dim flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">psychology</span>
+          Get Expert Advice
+        </button>
+        <button onclick="setPage('chat'); setMode('career', document.querySelector('[data-mode=career]'))"
+          class="bg-surface-container-high text-on-surface-variant px-6 py-3 text-xs font-bold uppercase tracking-widest snap-motion hover:bg-surface-container-highest">
+          Open in Chat
+        </button>
+      </div>
+      <div id="career-output" class="hidden mt-6 border-l-2 border-primary pl-6">
+        <p class="text-[10px] uppercase tracking-widest text-primary font-bold mb-3">Expert Advice</p>
+        <div id="career-result" class="text-sm text-on-surface leading-relaxed whitespace-pre-wrap"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const USER = "{{ user }}";
+let currentMode = 'chat';
+let isStreaming = false;
+let pdfUploaded = false;
+
+
+function setPage(page) {
+  ['chat','pdf','goal','career'].forEach(p => {
+    document.getElementById('page-' + p).classList.add('hidden');
+    document.getElementById('page-' + p).classList.remove('flex');
+    const nav = document.getElementById('nav-' + p);
+    if (nav) nav.classList.remove('active');
+  });
+  const target = document.getElementById('page-' + page);
+  target.classList.remove('hidden');
+  if (page === 'chat') target.classList.add('flex');
+  const nav = document.getElementById('nav-' + page);
+  if (nav) nav.classList.add('active');
+}
+
+
+function setMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.mode-pill').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const modeLabels = { chat: 'Chat', pdf: 'PDF Analysis', goal: 'Goal Planner', career: 'Career Coach' };
+  document.getElementById('mode-label').textContent = modeLabels[mode] || mode;
+
+  const pdfBar = document.getElementById('pdf-upload-bar');
+  const placeholder = document.getElementById('chat-input');
+  const placeholders = {
+    chat: 'Type your message...',
+    pdf: 'Ask a question about your PDF...',
+    goal: 'Describe your goal in detail...',
+    career: 'Describe your career situation...'
+  };
+  placeholder.placeholder = placeholders[mode] || 'Type your message...';
+  pdfBar.classList.toggle('hidden', mode !== 'pdf');
+  document.getElementById('chat-input').focus();
+}
+
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 160) + 'px';
+}
+
+function scrollToBottom() {
+  const container = document.getElementById('chat-messages');
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideWelcome() {
+  const w = document.getElementById('chat-welcome');
+  if (w) w.style.display = 'none';
+}
+
+function quickPrompt(text) {
+  document.getElementById('chat-input').value = text;
+  sendMessage();
+}
+
+function appendMessage(role, content, streaming = false) {
+  hideWelcome();
+  const container = document.getElementById('messages-inner');
+  const div = document.createElement('div');
+  div.className = role === 'user' ? 'msg-user p-4' : 'msg-ai py-2';
+  div.id = streaming ? 'streaming-msg' : '';
+
+  const inner = document.createElement('div');
+  inner.className = 'flex gap-4 items-start';
+
+  const avatar = document.createElement('div');
+  avatar.className = role === 'user'
+    ? 'w-7 h-7 bg-secondary-container flex items-center justify-center flex-shrink-0 mt-0.5'
+    : 'w-7 h-7 bg-primary flex items-center justify-center flex-shrink-0 mt-0.5';
+  avatar.innerHTML = role === 'user'
+    ? `<span class="text-[9px] font-bold text-on-surface-variant">${USER.slice(0,2).toUpperCase()}</span>`
+    : `<svg width="14" height="14" viewBox="0 0 32 32" fill="none"><path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#006413" stroke-width="2.5" fill="none"/><path d="M16 4L16 16M16 16L28 10M16 16L4 10M16 16L28 22M16 16L4 22M16 16L16 28" stroke="#006413" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="#006413"/></svg>`;
+
+  const msgContent = document.createElement('div');
+  msgContent.className = 'flex-1 min-w-0';
+
+  const label = document.createElement('div');
+  label.className = 'text-[9px] font-bold uppercase tracking-widest mb-1.5 ' + (role === 'user' ? 'text-on-surface-variant' : 'text-primary');
+  label.textContent = role === 'user' ? USER : 'Zirak AI';
+
+  const text = document.createElement('div');
+  text.className = 'text-sm text-on-surface leading-relaxed' + (streaming ? ' cursor-blink' : '');
+  text.id = streaming ? 'streaming-text' : '';
+  text.textContent = content;
+
+  msgContent.appendChild(label);
+  msgContent.appendChild(text);
+  inner.appendChild(avatar);
+  inner.appendChild(msgContent);
+  div.appendChild(inner);
+  container.appendChild(div);
+  scrollToBottom();
+  return text;
+}
+
+async function sendMessage() {
+  if (isStreaming) return;
+  const input = document.getElementById('chat-input');
+  const prompt = input.value.trim();
+  if (!prompt) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  appendMessage('user', prompt);
+
+  isStreaming = true;
+  const btn = document.getElementById('send-btn');
+  btn.innerHTML = '<span class="material-symbols-outlined text-base animate-spin">refresh</span>';
+  btn.disabled = true;
+
+  const streamEl = appendMessage('assistant', '', true);
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ prompt, mode: currentMode })
+    });
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let full = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          try {
+            const data = JSON.parse(line.slice(6));
+            if (data.token) {
+              full += data.token;
+              streamEl.textContent = full;
+              scrollToBottom();
+            }
+          } catch {}
+        }
+      }
+    }
+    streamEl.classList.remove('cursor-blink');
+    streamEl.id = '';
+    const streamMsg = document.getElementById('streaming-msg');
+    if (streamMsg) streamMsg.id = '';
+  } catch (e) {
+    streamEl.textContent = 'Connection error. Please try again.';
+    streamEl.classList.remove('cursor-blink');
+  }
+
+  isStreaming = false;
+  btn.innerHTML = '<span class="material-symbols-outlined text-base">arrow_upward</span>';
+  btn.disabled = false;
+  input.focus();
+}
+
+async function clearChat() {
+  await fetch('/api/clear-chat', { method: 'POST' });
+  const container = document.getElementById('messages-inner');
+  container.innerHTML = `
+    <div id="chat-welcome" class="flex flex-col items-center justify-center py-16 gap-8">
+      <div class="w-16 h-16 bg-primary flex items-center justify-center">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#006413" stroke-width="2.5" fill="none"/><path d="M16 4L16 16M16 16L28 10M16 16L4 10M16 16L28 22M16 16L4 22M16 16L16 28" stroke="#006413" stroke-width="1.5"/><circle cx="16" cy="16" r="3" fill="#006413"/></svg>
+      </div>
+      <div class="text-center">
+        <h2 class="font-headline font-black text-3xl tracking-tighter text-on-surface mb-2">Zirak AI</h2>
+        <p class="text-on-surface-variant text-sm">Select a mode below and start your session.</p>
+      </div>
+    </div>`;
+}
+
+
+async function uploadPDF(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const status = document.getElementById('pdf-status');
+  status.textContent = 'Indexing ' + file.name + '...';
+  status.className = 'text-sm text-primary';
+  const fd = new FormData();
+  fd.append('file', file);
+  const res = await fetch('/api/upload-pdf', { method: 'POST', body: fd });
+  const data = await res.json();
+  if (data.ok) {
+    status.textContent = file.name + ' — ' + data.chunks + ' chunks indexed. Ready for questions.';
+    status.className = 'text-sm text-primary font-bold';
+    pdfUploaded = true;
+  } else {
+    status.textContent = data.error || 'Upload failed.';
+    status.className = 'text-sm text-error';
+  }
+}
+
+async function uploadPDFMain(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const statusEl = document.getElementById('pdf-main-status');
+  statusEl.textContent = 'Processing ' + file.name + '...';
+  statusEl.classList.remove('hidden');
+  document.getElementById('ws-status').textContent = 'Indexing...';
+  const fd = new FormData();
+  fd.append('file', file);
+  const res = await fetch('/api/upload-pdf', { method: 'POST', body: fd });
+  const data = await res.json();
+  if (data.ok) {
+    statusEl.textContent = file.name + ' indexed successfully — ' + data.chunks + ' chunks.';
+    document.getElementById('ws-status').textContent = 'Ready';
+    document.getElementById('ws-chunks').textContent = data.chunks;
+    pdfUploaded = true;
+  } else {
+    statusEl.textContent = data.error || 'Upload failed.';
+    statusEl.className = 'text-sm text-error font-bold';
+  }
+}
+
+function dragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over'); }
+function dragLeave(e) { document.getElementById('drop-zone').classList.remove('drag-over'); }
+function dropFile(e) {
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.name.endsWith('.pdf')) {
+    const input = document.getElementById('pdf-main-input');
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    input.files = dt.files;
+    uploadPDFMain(input);
+  }
+}
+
+
+async function generatePlan() {
+  const input = document.getElementById('goal-input').value.trim();
+  if (!input) return;
+  const outputDiv = document.getElementById('goal-output');
+  const resultEl = document.getElementById('goal-result');
+  outputDiv.classList.remove('hidden');
+  resultEl.textContent = '';
+  resultEl.classList.add('cursor-blink');
+
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ prompt: input, mode: 'goal' })
+  });
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '', full = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (line.startsWith('data: ')) {
+        try {
+          const data = JSON.parse(line.slice(6));
+          if (data.token) { full += data.token; resultEl.textContent = full; }
+        } catch {}
+      }
+    }
+  }
+  resultEl.classList.remove('cursor-blink');
+}
+
+
+function careerQuick(topic) {
+  document.getElementById('career-input').value = `I need help with: ${topic}. Please provide detailed, actionable advice.`;
+}
+
+async function getCareerAdvice() {
+  const input = document.getElementById('career-input').value.trim();
+  if (!input) return;
+  const outputDiv = document.getElementById('career-output');
+  const resultEl = document.getElementById('career-result');
+  outputDiv.classList.remove('hidden');
+  resultEl.textContent = '';
+  resultEl.classList.add('cursor-blink');
+
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ prompt: input, mode: 'career' })
+  });
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = '', full = '';
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    const lines = buffer.split('\n');
+    buffer = lines.pop();
+    for (const line of lines) {
+      if (line.startsWith('data: ')) {
+        try {
+          const data = JSON.parse(line.slice(6));
+          if (data.token) { full += data.token; resultEl.textContent = full; }
+        } catch {}
+      }
+    }
+  }
+  resultEl.classList.remove('cursor-blink');
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  setPage('chat');
+  document.getElementById('chat-input').focus();
+});
+</script>
+</body>
+</html>
