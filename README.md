@@ -1,23 +1,19 @@
 <div align="center">
 
-# 🌌 Zirak AI 
-### *Your High-Performance Intelligent Assistant*
+# Zirak AI
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/Flask-Backend-black.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
-  <img src="https://img.shields.io/badge/Model-Llama--3-purple.svg?style=for-the-badge&logo=meta&logoColor=white" alt="Model">
-  <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <a href="https://zirak-ai.onrender.com"><img src="https://img.shields.io/badge/Live_Demo-Online-success?style=for-the-badge" alt="Live Demo"></a>
-</p>
+**The Next Generation of Intelligent Assistants**
 
-*Zirak AI represents the next generation of personal AI assistants. Engineered from the ground up, it combines the sheer reasoning capability of LLaMA-3 with lightning-fast, custom-built Retrieval-Augmented Generation (RAG) and an elegant, responsive dark-mode UI.*
+[![Render Deployment](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://zirak-ai.onrender.com)
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
+[![Flask](https://img.shields.io/badge/flask-backend-black?style=for-the-badge)](https://flask.palletsprojects.com/)
+[![LLaMA-3](https://img.shields.io/badge/Model-meta%20llama%203-blueviolet?style=for-the-badge)](https://ai.meta.com/llama/)
 
-<h3><a href="https://zirak-ai.onrender.com">🔴 Experience the Live Deployment Here!</a></h3>
+<br>
 
-[**Explore Features**](#-key-features) •
-[**Architecture**](#-system-architecture--tech-stack) •
-[**Deployment Setup**](#-deployment-ready)
+<h3>🔴 <a href="https://zirak-ai.onrender.com"><b>CLICK HERE TO TRY THE LIVE APP</b></a> 🔴</h3>
+
+*A high-performance, modular AI suite engineered from scratch. Featuring Real-Time Streaming, Custom Numpy-backed Document RAG, and an intuitive Dark Mode UI.*
 
 ---
 
@@ -25,137 +21,136 @@
 
 <br>
 
-## 🎨 Premium User Experience
+## 🖥️ First Impression: Live UI
+
+We heavily prioritize a premium user experience. Click the image below to jump straight to the live web application!
 
 <div align="center">
   <a href="https://zirak-ai.onrender.com">
-    <img src="./static/assets/ui-preview.png" alt="Zirak AI User Interface" style="border-radius:12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); max-width: 100%;">
+    <img src="./static/assets/ui-preview.png" alt="Zirak AI User Interface" width="100%" style="border-radius: 10px; max-width: 900px; box-shadow: 0px 8px 24px rgba(0,0,0,0.6);">
   </a>
-  <br>
-  <i>Featuring a sleek, neon-accented dark theme with specialized intelligence workspaces.</i>
 </div>
 
 <br>
 
-## 🚀 Why Zirak AI? (Developer's Vision)
+## ⚡ Engineering Philosophy
 
-While many modern AI apps rely entirely on heavy, black-box frameworks like LangChain, **Zirak AI was crafted independently to demonstrate a profound understanding of core Machine Learning and AI engineering concepts.** 
+Unlike many AI wrappers that rely on heavy, black-box frameworks (like LangChain), **Zirak AI is crafted independently**.
 
-Instead of offloading work to bloated libraries, this project implements a **custom, lightweight Vector Search engine utilizing Numpy** for text embeddings and cosine similarity search. This architectural decision guarantees lightning-fast execution, reduced computational overhead, and absolute control over the data pipeline. Furthermore, the project showcases rigorous software engineering practices, secure session management, and highly efficient RESTful API design.
+- **Zero-Bloat Architecture:** Custom-built TF-IDF Vector Search engine utilizing raw `numpy`.
+- **Maximum Performance:** Lightning-fast token execution with optimized API streaming.
+- **Secure By Design:** Session-based authentication handling and isolated conversation states.
 
-<br>
-
-## ✨ Key Features
-
-Zirak AI isn't just a chatbot; it's a meticulously engineered, multi-modal productivity suite.
-
-- ⚡ **Real-Time Streaming Generation:** Implemented optimized Server-Sent Events (SSE) for fluid, token-by-token instant responses via the OpenRouter API. Watch the AI generate text identically to human typing speeds.
-- 📚 **Custom Document Intelligence (RAG):** Built-in TF-IDF style Vector Database utilizing raw Numpy. Upload PDFs, and Zirak will seamlessly parse, vectorize, chunk, and search your documents to anchor responses to your private data.
-- 🎯 **Dynamic Personas:** Advanced context-switching architecture seamlessly maps precise system prompts for specialized tasks:
-  - 🧠 **General Chat:** A sharp, precise, and highly capable intelligent conversation logic.
-  - 📈 **Goal Planner:** Automatically generates structured, step-by-step actionable plans with milestones.
-  - 💼 **Career Coach:** Delivers expert professional strategy and industry insights based on the latest trends.
-  - 📄 **Document Analyst:** Intelligently restricts conversational context purely to your uploaded PDF knowledge base.
-- 🔒 **Secure Authentication Architecture:** Scalable SQLite backend with SHA-256 salted password hashing, robust Flask user sessions, and completely isolated, persistent chat histories per user.
+This repository demonstrates rigorous full-stack software engineering, focusing on transparency, speed, and fundamental Machine Learning concepts.
 
 <br>
 
-## 💻 System Architecture & Tech Stack
+## 🔥 Core Features
 
-Carefully selected modern tools ensure Zirak AI handles complex asynchronous operations smoothly while remaining incredibly lightweight.
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🚀 Real-Time Streaming</h3>
+      <p>Fluid, token-by-token instant responses powered by OpenRouter API and Server-Sent Events (SSE). Experience AI generation at human typing speeds.</p>
+    </td>
+    <td width="50%">
+      <h3>📚 Private Document RAG</h3>
+      <p>Securely upload PDFs. Zirak intelligently parses, chunks, and vectorizes your data internally, enabling semantic search and precise document analysis.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🎭 Dynamic Personas</h3>
+      <p>Instantly switch between a core Chat Assistant, an automated <b>Goal Planner</b>, an expert <b>Career Coach</b>, or a specialized <b>Document Analyst</b>.</p>
+    </td>
+    <td width="50%">
+      <h3>🔐 Secure Local DB</h3>
+      <p>Powered by SQLite with SHA-256 password hashing. Every user gets an isolated, persistent chat history and secure login session.</p>
+    </td>
+  </tr>
+</table>
 
-| Layer | Technologies Used | Purpose |
+<br>
+
+## 🛠️ Technology Stack
+
+<div align="center">
+  
+| Architectural Layer | Technologies Used | Micro-Service Purpose |
 | :--- | :--- | :--- |
-| **Backend API** | Python, Flask, Werkzeug | REST API, Routing, Secure Session Management |
-| **Database** | SQLite3 | Persistent User Authentication & Chat History |
-| **AI Engine / LLM** | OpenRouter API, LLaMA-3 (8B) | Core Large Language Model processing logic |
-| **Vector DB / NLP** | Numpy, PyPDF2, Pickle | Cosine Similarity Search, Embeddings, PDF Parsing |
-| **Frontend UI/UX** | HTML5, CSS3, Vanilla JavaScript | Asynchronous fetch, SSE Streaming Handling, DOM manipulation |
+| **Backend API Server** | `Python`, `Flask`, `Werkzeug` | REST Routing, Server Session Logic |
+| **Vector Engine (RAG)** | `Numpy`, `PyPDF2`, `Pickle` | Custom Math-based Cosine Similarity Search |
+| **Large Language Model** | `OpenRouter API`, `LLaMA-3 (8B)` | Core AI Processing & Reasoning Engine |
+| **Database Architecture** | `SQLite3` | Persistent authentication and chat states |
+| **Frontend Platform** | `Vanilla JS`, `HTML5`, `CSS3` | Asynchronous SSE Fetching, DOM Manipulation |
+
+</div>
 
 <br>
 
-## 🛠 Quick Start Guide
+## 🚀 Quick Start (Run Locally)
 
-You can have the full AI suite running locally in your environment in **under 2 minutes.**
+Ready to test the source code on your own machine? It takes less than 2 minutes.
 
-### 1. Clone & Prepare
+<details>
+<summary><b>🔥 Click here to expand the installation steps!</b></summary>
+<br>
+
+**1. Clone the repository:**
 ```bash
-# Clone the repository
 git clone https://github.com/shah-bakhsh/zirak-ai.git
 cd zirak-ai
-
-# Create a clean virtual environment
-python -m venv venv
-
-# Activate the environment
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
 ```
 
-### 2. Install Dependencies
+**2. Create a virtual environment:**
 ```bash
-# Install the core engines needed to run Zirak
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
+
+**3. Install dependencies:**
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Environment Configuration
-Create a **`.env`** file precisely in the root directory. This standard practice keeps your API keys secure and fully decoupled from the source code.
+**4. Set up Environment Variables:**
+Create a `.env` file in the root folder:
 ```env
-# Required API Keys & Secrets
 OPENROUTER_API_KEY=sk-or-v1-your-api-key-here
-SECRET_KEY=super-secret-zirak-session-key-2024
+SECRET_KEY=super-secret-production-key-2024
 ```
 
-### 4. Launch the Application
+**5. Launch the Server:**
 ```bash
-# Ignite the server!
 python app.py
 ```
-> *Zirak AI will now run at `http://localhost:5000` ✨.*
+*Visit `http://localhost:5000` in your browser!*
+</details>
 
 <br>
 
-## 📁 Repository Structure
+## ☁️ Cloud Deployment
 
-```text
-📦 Zirak AI
- ┣ 📂 data/               # SQLite Databases & Serialized Vectors (.db, .pkl)
- ┣ 📂 templates/          # Modular Jinja2 HTML Templates (index.html, login.html)
- ┣ 📂 static/             # Custom CSS frameworks & JS operational logic 
- ┃ ┗ 📂 assets/           # UI screenshots and visual assets
- ┣ 📂 uploads/            # Temporary volatile storage for PDF file streams
- ┣ 📜 app.py              # Main Application Entry Point & Route Handlers
- ┣ 📜 requirements.txt    # Frozen Python Dependencies
- ┗ 📜 .env                # Secret Environment Variables (Excluded from Git)
-```
+Zirak AI is actively hosted on Render. To deploy your own instance to Render, Heroku, or AWS:
 
-<br>
-
-## ☁️ Deployment Ready
-
-This application is structurally prepared for immediate production deployment across major cloud-hosting environments. **It is currently actively hosted and deployed live on Render.**
-
-**WSGI Application Server Run Command:**
+1. Connect your repository to your cloud provider.
+2. Add your `.env` variables in the provider's secret manager.
+3. Configure the **WSGI Server Start Command**:
 ```bash
 gunicorn app:app
 ```
-*(Ensure `gunicorn` is properly referenced and environmental variables are securely populated into your provider's dashboard settings.)*
 
 <br>
 
-## 🤝 Let's Connect
+## 🤝 Connect With The Developer
 
-This project was built to solve real-world problems with completely transparent, optimized, and impactful code. I am always open to exploring new engineering opportunities or exciting technical collaborations.
+Built with passion for clean code and innovative AI solutions. If you appreciate independent, high-performance architecture, let's connect!
 
 - **GitHub:** [@shah-bakhsh](https://github.com/shah-bakhsh)
 - **LinkedIn:** [Shah Bakhsh](https://www.linkedin.com/in/shah-bakhsh/)
 - **Email:** [shahbakhshtech@gmail.com](mailto:shahbakhshtech@gmail.com)
 
-If you found the codebase insightful or if it has helped you, I would deeply appreciate it if you could **⭐️ Star** the repository! It keeps me motivated.
-
 <div align="center">
   <br>
-  <i>Designed with passion. Engineered for maximum impact.</i>
+  <i>If you found this project helpful or inspiring, please consider dropping a ⭐️ to show your support!</i>
 </div>
