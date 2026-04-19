@@ -1,19 +1,32 @@
 <div align="center">
 
-# Zirak AI
-
-**The Next Generation of Intelligent Assistants**
-
-[![Render Deployment](https://img.shields.io/badge/Deployed_on-Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)](https://zirak-ai.onrender.com)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg?style=for-the-badge)](https://www.python.org/downloads/)
-[![Flask](https://img.shields.io/badge/flask-backend-black?style=for-the-badge)](https://flask.palletsprojects.com/)
-[![LLaMA-3](https://img.shields.io/badge/Model-meta%20llama%203-blueviolet?style=for-the-badge)](https://ai.meta.com/llama/)
-
 <br>
 
-<h3>🔴 <a href="https://zirak-ai.onrender.com"><b>CLICK HERE TO TRY THE LIVE APP</b></a> 🔴</h3>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://img.shields.io/badge/%F0%9F%8C%8C%20ZIRAK%20AI-Intelligent%20Assistant-9cff93?style=for-the-badge&labelColor=0e0e0e">
+  <img src="https://img.shields.io/badge/%F0%9F%8C%8C%20ZIRAK%20AI-Intelligent%20Assistant-9cff93?style=for-the-badge&labelColor=0e0e0e" alt="Zirak AI" height="45">
+</picture>
 
-*A high-performance, modular AI suite engineered from scratch. Featuring Real-Time Streaming, Custom Numpy-backed Document RAG, and an intuitive Dark Mode UI.*
+<br><br>
+
+<samp>A production-grade AI assistant with real-time streaming, custom RAG document intelligence, and multi-persona capabilities — engineered entirely from scratch.</samp>
+
+<br><br>
+
+<a href="https://zirak-ai.onrender.com"><kbd> <br> &nbsp;&nbsp;🔴 TRY LIVE DEMO&nbsp;&nbsp; <br> <br></kbd></a>&nbsp;&nbsp;
+<a href="#-getting-started"><kbd> <br> &nbsp;&nbsp;⚡ QUICK START&nbsp;&nbsp; <br> <br></kbd></a>&nbsp;&nbsp;
+<a href="#-features"><kbd> <br> &nbsp;&nbsp;✨ FEATURES&nbsp;&nbsp; <br> <br></kbd></a>
+
+<br><br>
+
+<img src="https://img.shields.io/badge/python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">&nbsp;
+<img src="https://img.shields.io/badge/flask-2.x-000000?style=flat-square&logo=flask&logoColor=white" alt="Flask">&nbsp;
+<img src="https://img.shields.io/badge/LLM-LLaMA%203-7C3AED?style=flat-square&logo=meta&logoColor=white" alt="LLaMA 3">&nbsp;
+<img src="https://img.shields.io/badge/RAG-NumPy%20Vectors-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy">&nbsp;
+<img src="https://img.shields.io/badge/deploy-render-46E3B7?style=flat-square&logo=render&logoColor=white" alt="Render">&nbsp;
+<img src="https://img.shields.io/badge/build-passing-brightgreen?style=flat-square" alt="Build">
+
+<br>
 
 ---
 
@@ -21,136 +34,272 @@
 
 <br>
 
-## 🖥️ First Impression: Live UI
-
-We heavily prioritize a premium user experience. Click the image below to jump straight to the live web application!
+## <samp>📸 Preview</samp>
 
 <div align="center">
-  <a href="https://zirak-ai.onrender.com">
-    <img src="./static/assets/ui-preview.png" alt="Zirak AI User Interface" width="100%" style="border-radius: 10px; max-width: 900px; box-shadow: 0px 8px 24px rgba(0,0,0,0.6);">
-  </a>
+<a href="https://zirak-ai.onrender.com">
+<picture>
+  <img src="./static/assets/ui-preview.png" alt="Zirak AI — Chat Interface" width="88%">
+</picture>
+</a>
+
+<br><br>
+
+<kbd>Dark Theme</kbd>&nbsp;&nbsp;<kbd>Neon Green Accents</kbd>&nbsp;&nbsp;<kbd>Multi-Workspace UI</kbd>&nbsp;&nbsp;<kbd>Real-Time Streaming</kbd>
+
 </div>
 
 <br>
 
-## ⚡ Engineering Philosophy
-
-Unlike many AI wrappers that rely on heavy, black-box frameworks (like LangChain), **Zirak AI is crafted independently**.
-
-- **Zero-Bloat Architecture:** Custom-built TF-IDF Vector Search engine utilizing raw `numpy`.
-- **Maximum Performance:** Lightning-fast token execution with optimized API streaming.
-- **Secure By Design:** Session-based authentication handling and isolated conversation states.
-
-This repository demonstrates rigorous full-stack software engineering, focusing on transparency, speed, and fundamental Machine Learning concepts.
-
-<br>
-
-## 🔥 Core Features
+## <samp>💡 About</samp>
 
 <table>
-  <tr>
-    <td width="50%">
-      <h3>🚀 Real-Time Streaming</h3>
-      <p>Fluid, token-by-token instant responses powered by OpenRouter API and Server-Sent Events (SSE). Experience AI generation at human typing speeds.</p>
-    </td>
-    <td width="50%">
-      <h3>📚 Private Document RAG</h3>
-      <p>Securely upload PDFs. Zirak intelligently parses, chunks, and vectorizes your data internally, enabling semantic search and precise document analysis.</p>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%">
-      <h3>🎭 Dynamic Personas</h3>
-      <p>Instantly switch between a core Chat Assistant, an automated <b>Goal Planner</b>, an expert <b>Career Coach</b>, or a specialized <b>Document Analyst</b>.</p>
-    </td>
-    <td width="50%">
-      <h3>🔐 Secure Local DB</h3>
-      <p>Powered by SQLite with SHA-256 password hashing. Every user gets an isolated, persistent chat history and secure login session.</p>
-    </td>
-  </tr>
+<tr>
+<td>
+
+**Zirak AI** is a full-stack AI assistant built **entirely from scratch** — no LangChain, no heavy abstraction layers, no black-box frameworks.
+
+The project implements its own:
+- 🔢 **Custom Vector Search Engine** using raw NumPy for cosine similarity
+- 📄 **PDF Chunking Pipeline** for document ingestion and retrieval
+- ⚡ **SSE Streaming Frontend** for real-time token-by-token generation
+- 🔐 **Authentication System** with SHA-256 hashing and isolated sessions
+
+> <samp>Every component — from the embedding engine to the auth layer — was designed and written independently to demonstrate deep understanding of how modern AI applications actually work under the hood.</samp>
+
+</td>
+</tr>
 </table>
 
 <br>
 
-## 🛠️ Technology Stack
+## <samp>✨ Features</samp>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+<h3 align="center">⚡ Real-Time Streaming</h3>
+
+<p align="center">
+<kbd>Server-Sent Events</kbd>&nbsp;<kbd>Token-by-Token</kbd>
+</p>
+
+Fluid response generation using SSE. The frontend reads the stream incrementally and renders each token with a typing cursor animation — identical to how ChatGPT works.
+
+</td>
+<td width="50%" valign="top">
+
+<h3 align="center">📄 Document RAG</h3>
+
+<p align="center">
+<kbd>PDF Upload</kbd>&nbsp;<kbd>Vector Search</kbd>
+</p>
+
+Upload any PDF. The backend extracts text via PyPDF2, splits it into chunks, generates TF-IDF style embeddings, and performs cosine similarity search to ground AI responses in your private data.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+<h3 align="center">🎭 Multi-Persona Engine</h3>
+
+<p align="center">
+<kbd>4 AI Modes</kbd>&nbsp;<kbd>Context Switching</kbd>
+</p>
+
+Four specialized modes with tuned system prompts:
+
+| Mode | Purpose |
+|:-----|:--------|
+| <samp>💬 Chat</samp> | General-purpose assistant |
+| <samp>🎯 Goal Planner</samp> | Structured action plans |
+| <samp>💼 Career Coach</samp> | Professional strategy |
+| <samp>📄 PDF Analyst</samp> | Document-grounded Q&A |
+
+</td>
+<td width="50%" valign="top">
+
+<h3 align="center">🔐 Secure Auth</h3>
+
+<p align="center">
+<kbd>SHA-256</kbd>&nbsp;<kbd>Flask Sessions</kbd>
+</p>
+
+Complete user management with password hashing, session middleware, and per-user isolated chat histories stored in SQLite. Every user gets their own persistent conversation memory.
+
+</td>
+</tr>
+</table>
+
+<br>
+
+## <samp>🏗️ Architecture</samp>
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      CLIENT  (Browser)                          │
+│       HTML5 · CSS3 · Vanilla JS · Tailwind · SSE Reader         │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │  HTTP + Server-Sent Events
+┌──────────────────────────▼──────────────────────────────────────┐
+│                    FLASK API SERVER (app.py)                     │
+│                                                                 │
+│   ┌──────────────┐   ┌───────────────┐   ┌──────────────────┐  │
+│   │  Auth Layer   │   │  Chat Router  │   │  PDF Processor   │  │
+│   │  signup/login │   │  SSE Stream   │   │  upload/parse    │  │
+│   └──────┬───────┘   └───────┬───────┘   └────────┬─────────┘  │
+│          │                   │                     │            │
+│   ┌──────▼───────┐   ┌──────▼───────┐   ┌────────▼─────────┐  │
+│   │   SQLite DB   │   │  OpenRouter  │   │  Vector Store     │  │
+│   │   users.db    │   │  LLaMA-3 8B  │   │  NumPy Cosine    │  │
+│   │   memory.db   │   │  (External)  │   │  Similarity      │  │
+│   └──────────────┘   └──────────────┘   └──────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+<br>
+
+## <samp>🛠️ Tech Stack</samp>
 
 <div align="center">
-  
-| Architectural Layer | Technologies Used | Micro-Service Purpose |
-| :--- | :--- | :--- |
-| **Backend API Server** | `Python`, `Flask`, `Werkzeug` | REST Routing, Server Session Logic |
-| **Vector Engine (RAG)** | `Numpy`, `PyPDF2`, `Pickle` | Custom Math-based Cosine Similarity Search |
-| **Large Language Model** | `OpenRouter API`, `LLaMA-3 (8B)` | Core AI Processing & Reasoning Engine |
-| **Database Architecture** | `SQLite3` | Persistent authentication and chat states |
-| **Frontend Platform** | `Vanilla JS`, `HTML5`, `CSS3` | Asynchronous SSE Fetching, DOM Manipulation |
+
+| <samp>Layer</samp> | <samp>Technology</samp> | <samp>Role</samp> |
+|:------|:-----------|:-----|
+| <kbd>Backend</kbd> | `Python` `Flask` `Werkzeug` | REST API, routing, sessions |
+| <kbd>Database</kbd> | `SQLite3` | Users, chat history, memory |
+| <kbd>AI Engine</kbd> | `OpenRouter API` → `LLaMA-3 8B` | LLM inference & reasoning |
+| <kbd>Vector DB</kbd> | `NumPy` `Pickle` | Custom embeddings & search |
+| <kbd>Documents</kbd> | `PyPDF2` | PDF extraction & chunking |
+| <kbd>Frontend</kbd> | `HTML5` `CSS3` `JavaScript` `Tailwind` | UI, SSE stream reader |
+| <kbd>Hosting</kbd> | `Render` `Gunicorn` | Production WSGI server |
 
 </div>
 
 <br>
 
-## 🚀 Quick Start (Run Locally)
-
-Ready to test the source code on your own machine? It takes less than 2 minutes.
+## <samp>🚀 Getting Started</samp>
 
 <details>
-<summary><b>🔥 Click here to expand the installation steps!</b></summary>
+<summary><kbd> &nbsp;📋 EXPAND — Local Development Setup&nbsp; </kbd></summary>
 <br>
 
-**1. Clone the repository:**
+**<samp>STEP 1 — Clone</samp>**
 ```bash
 git clone https://github.com/shah-bakhsh/zirak-ai.git
 cd zirak-ai
 ```
 
-**2. Create a virtual environment:**
+**<samp>STEP 2 — Virtual Environment</samp>**
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+# Activate:
+source venv/bin/activate    # Mac / Linux
+venv\Scripts\activate       # Windows
 ```
 
-**3. Install dependencies:**
+**<samp>STEP 3 — Dependencies</samp>**
 ```bash
 pip install -r requirements.txt
 ```
 
-**4. Set up Environment Variables:**
-Create a `.env` file in the root folder:
+**<samp>STEP 4 — Environment Variables</samp>**
+
+Create a `.env` file in the project root:
 ```env
-OPENROUTER_API_KEY=sk-or-v1-your-api-key-here
-SECRET_KEY=super-secret-production-key-2024
+OPENROUTER_API_KEY=sk-or-v1-your-key-here
+SECRET_KEY=your-secret-session-key
 ```
 
-**5. Launch the Server:**
+**<samp>STEP 5 — Launch</samp>**
 ```bash
 python app.py
 ```
-*Visit `http://localhost:5000` in your browser!*
+
+> Open <kbd>http://localhost:5000</kbd> in your browser.
+
 </details>
 
 <br>
 
-## ☁️ Cloud Deployment
+## <samp>☁️ Deployment</samp>
 
-Zirak AI is actively hosted on Render. To deploy your own instance to Render, Heroku, or AWS:
+<table>
+<tr>
+<td>
 
-1. Connect your repository to your cloud provider.
-2. Add your `.env` variables in the provider's secret manager.
-3. Configure the **WSGI Server Start Command**:
+🟢 **Currently live** at <a href="https://zirak-ai.onrender.com"><kbd>&nbsp;zirak-ai.onrender.com&nbsp;</kbd></a>
+
+**Production server command:**
 ```bash
 gunicorn app:app
 ```
 
+Set <kbd>OPENROUTER_API_KEY</kbd> and <kbd>SECRET_KEY</kbd> as environment variables in your hosting provider's dashboard.
+
+</td>
+</tr>
+</table>
+
 <br>
 
-## 🤝 Connect With The Developer
+## <samp>📂 Project Structure</samp>
 
-Built with passion for clean code and innovative AI solutions. If you appreciate independent, high-performance architecture, let's connect!
+```
+zirak-ai/
+│
+├── app.py                  ← Application entry point (routes, API, streaming)
+├── requirements.txt        ← Python dependencies
+├── .env                    ← API keys (git-ignored)
+├── .gitignore
+│
+├── templates/
+│   ├── index.html          ← Main chat interface (711 lines of UI)
+│   └── login.html          ← Authentication page
+│
+├── data/
+│   ├── users.db            ← User credentials    (auto-generated)
+│   ├── memory.db           ← Chat history         (auto-generated)
+│   └── vectors.pkl         ← Vector embeddings    (auto-generated)
+│
+└── uploads/
+    └── pdf_files/          ← Uploaded documents
+```
 
-- **GitHub:** [@shah-bakhsh](https://github.com/shah-bakhsh)
-- **LinkedIn:** [Shah Bakhsh](https://www.linkedin.com/in/shah-bakhsh/)
-- **Email:** [shahbakhshtech@gmail.com](mailto:shahbakhshtech@gmail.com)
+<br>
+
+## <samp>🗺️ Roadmap</samp>
+
+<table>
+<tr><td>
+
+| Status | Feature | Description |
+|:------:|:--------|:------------|
+| <samp>🔲</samp> | **Chat Threads** | Multiple independent conversations with sidebar |
+| <samp>🔲</samp> | **PostgreSQL** | Persistent database for production |
+| <samp>🔲</samp> | **Markdown Rendering** | Rich text with syntax-highlighted code blocks |
+| <samp>🔲</samp> | **Voice Input** | Browser-native speech-to-text |
+| <samp>🔲</samp> | **Web Search** | Real-time internet search integration |
+| <samp>🔲</samp> | **Multi-Format Upload** | Support for `.docx`, `.csv`, `.txt` |
+| <samp>🔲</samp> | **Semantic Embeddings** | HuggingFace transformer-based vectors |
+
+</td></tr>
+</table>
+
+<br>
+
+## <samp>🤝 Connect</samp>
 
 <div align="center">
-  <br>
-  <i>If you found this project helpful or inspiring, please consider dropping a ⭐️ to show your support!</i>
+
+<a href="https://github.com/shah-bakhsh"><kbd> <br> &nbsp;&nbsp;GitHub: @shah-bakhsh&nbsp;&nbsp; <br> <br></kbd></a>&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/shah-bakhsh/"><kbd> <br> &nbsp;&nbsp;LinkedIn: Shah Bakhsh&nbsp;&nbsp; <br> <br></kbd></a>&nbsp;&nbsp;
+<a href="mailto:shahbakhshtech@gmail.com"><kbd> <br> &nbsp;&nbsp;Email: shahbakhshtech&nbsp;&nbsp; <br> <br></kbd></a>
+
+<br><br>
+
+<samp>If this project was useful or interesting, a ⭐ on the repo means a lot.</samp>
+
 </div>
