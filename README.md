@@ -1,22 +1,23 @@
 <div align="center">
 
 # 🌌 Zirak AI 
-### *Your Production-Ready, High-Performance Intelligent Assistant*
+### *Your High-Performance Intelligent Assistant*
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.8+-blue.svg?style=for-the-badge&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/Flask-Backend-black.svg?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
   <img src="https://img.shields.io/badge/Model-Llama--3-purple.svg?style=for-the-badge&logo=meta&logoColor=white" alt="Model">
   <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
-  <img src="https://img.shields.io/badge/Status-Production--Ready-success?style=for-the-badge" alt="Status">
+  <a href="https://zirak-ai.onrender.com"><img src="https://img.shields.io/badge/Live_Demo-Online-success?style=for-the-badge" alt="Live Demo"></a>
 </p>
 
 *Zirak AI represents the next generation of personal AI assistants. Engineered from the ground up, it combines the sheer reasoning capability of LLaMA-3 with lightning-fast, custom-built Retrieval-Augmented Generation (RAG) and an elegant, responsive dark-mode UI.*
 
+<h3><a href="https://zirak-ai.onrender.com">🔴 Experience the Live Deployment Here!</a></h3>
+
 [**Explore Features**](#-key-features) •
 [**Architecture**](#-system-architecture--tech-stack) •
-[**Quick Start**](#-quick-start) •
-[**Deployment**](#-deployment-ready)
+[**Deployment Setup**](#-deployment-ready)
 
 ---
 
@@ -27,7 +28,9 @@
 ## 🎨 Premium User Experience
 
 <div align="center">
-  <img src="./static/assets/ui-preview.png" alt="Zirak AI User Interface" style="border-radius:12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); max-width: 100%;">
+  <a href="https://zirak-ai.onrender.com">
+    <img src="./static/assets/ui-preview.png" alt="Zirak AI User Interface" style="border-radius:12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); max-width: 100%;">
+  </a>
   <br>
   <i>Featuring a sleek, neon-accented dark theme with specialized intelligence workspaces.</i>
 </div>
@@ -110,7 +113,7 @@ SECRET_KEY=super-secret-zirak-session-key-2024
 # Ignite the server!
 python app.py
 ```
-> *Zirak AI is now running at `http://localhost:5000` ✨. Open your browser, register securely, and experience the interface.*
+> *Zirak AI will now run at `http://localhost:5000` ✨.*
 
 <br>
 
@@ -132,7 +135,7 @@ python app.py
 
 ## ☁️ Deployment Ready
 
-This application is structurally prepared for immediate production deployment across major cloud-hosting environments like **Render, Heroku, or PythonAnywhere**.
+This application is structurally prepared for immediate production deployment across major cloud-hosting environments. **It is currently actively hosted and deployed live on Render.**
 
 **WSGI Application Server Run Command:**
 ```bash
